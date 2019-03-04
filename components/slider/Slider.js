@@ -35,7 +35,8 @@ const factory = (ProgressBar, Input) => {
         snap: PropTypes.string,
         snaps: PropTypes.string
       }),
-      value: PropTypes.number
+      value: PropTypes.number,
+      moveToValue: PropTypes.bool
     };
 
     static defaultProps = {
@@ -46,7 +47,8 @@ const factory = (ProgressBar, Input) => {
       pinned: false,
       snaps: false,
       step: 0.01,
-      value: 0
+      value: 0,
+      moveToValue: true
     };
 
     state = {
@@ -276,8 +278,8 @@ const factory = (ProgressBar, Input) => {
           <div
             ref='slider'
             className={theme.container}
-            onMouseDown={this.handleMouseDown}
-            onTouchStart={this.handleTouchStart}
+            onMouseDown={this.props.moveToValue ? this.handleMouseDown : () => {}}
+            onTouchStart={this.props.moveToValue ? this.handleTouchStart : () => {}}
             >
             <div
               ref='knob'
